@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('filieres', function (Blueprint $table) {
             $table->id();
             $table->string("nom");
-            $table->string("option");
+            $table->string("option")->nullable();
             $table->tinyInteger("annee")->default(1);
             $table->timestamps();
         });
