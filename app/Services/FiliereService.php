@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Repositories\Groupe\FiliereImplementation;
+use App\Repositories\Filiere\FiliereImplementation;
 
 class FiliereService
 {
@@ -19,5 +19,9 @@ class FiliereService
 
     public function listFiliers(){
         return $this->repository->findAll();
+    }
+
+    public function createFilieres(array $data){
+        return $this->repository->create($data);
     }
 }
