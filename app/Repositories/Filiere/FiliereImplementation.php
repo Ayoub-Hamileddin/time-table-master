@@ -14,5 +14,14 @@ class FiliereImplementation implements FiliereInterface {
     {
         return Filiere::create($data);
     }
-
+    
+    public function update($data,$filiere){
+        return $filiere->update($data);
+    }
+    public function getOptionsFromAnnee($annee){
+        return Filiere::where("annee",$annee)
+                  ->select("id","nom","option")
+                  ->distinct()
+                  ->get();
+    }
 }
