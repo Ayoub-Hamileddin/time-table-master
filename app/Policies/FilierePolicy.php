@@ -37,7 +37,7 @@ class FilierePolicy
      */
     public function update(User $user, Filiere $filiere): bool
     {
-        return false;
+        return $user->role === "admin";
     }
 
     /**
@@ -45,7 +45,7 @@ class FilierePolicy
      */
     public function delete(User $user, Filiere $filiere): bool
     {
-        return false;
+        return  $user->role === "admin";
     }
 
     /**
