@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\filiere\createFiliereRequest;
 use App\Http\Requests\filiere\StoreFiliereRequest;
+use App\Http\Requests\Filiere\UpdateFiliereRequest;
 use App\Models\Filiere;
 use App\Services\FiliereService;
 
-use Illuminate\Http\Request;
+
 
 class FiliereController extends Controller
 {
@@ -34,7 +34,6 @@ class FiliereController extends Controller
      */
     public function create()
     {
-       $this->authorize("create",Filiere::class);
        $filieres = Filiere::all();
        return view("admin.filiere.create",compact("filieres"));
     }
@@ -44,9 +43,11 @@ class FiliereController extends Controller
      */
     public function store(StoreFiliereRequest $request)
     {   
+        $this->authorize("create",Filiere::class);
+
         $data = $request->validated();
         $data["annee"] = $request->annee ;
-        $newFiliere = $this->filiereService->createFilieres($data);
+        $newFiliere = $this->filiereService->createFiliere($data);
 
         if (!$newFiliere) {
             return redirect()->back()->with("message","something went wrong");
@@ -66,24 +67,36 @@ class FiliereController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+    public function edit(Filiere $filiere)
+    {   
+       return view("admin.filiere.edit",compact("filiere"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateFiliereRequest $request, Filiere $filiere)
     {
-        //
+        $this->authorize("update",$filiere);
+
+        $data = $request->validated();
+        $this->filiereService->updateFiliere($data,$filiere);
+        return redirect()->route("filieres.index")
+            ->with("message","filiere updated successfuly");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Filiere $filiere)
     {
-        //
+        $this->authorize("delete",$filiere);
+        $filiere->delete();
+        return redirect()->route("filieres.index")
+            ->with("message","filiere deleted successfuly");
+    }
+
+    public function getOptionAnnee(int $annee){
+        return $this->filiereService->getOptions($annee);
     }
 }
