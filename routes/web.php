@@ -21,6 +21,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(["auth","admin"])->group(function(){
     Route::resource("filieres",FiliereController::class);
+    Route::get("/filieres/option/{annee}",[FiliereController::class,"getOptionAnnee"]);
+    Route::resource("groupes",GroupeController::class);
 });
 
 
