@@ -7,4 +7,10 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    resolve: {
+        alias: {
+            // This alias maps $ to jQuery
+            $: "jQuery",
+        },
+    },
 });
