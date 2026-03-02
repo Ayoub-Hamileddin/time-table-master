@@ -21,7 +21,15 @@ class FiliereService
         return $this->repository->findAll();
     }
 
-    public function createFilieres(array $data){
+    public function createFiliere(array $data){
         return $this->repository->create($data);
+    }
+
+    public function updateFiliere(array $data,$filiere ){
+        return $this->repository->update($data,$filiere);
+    }
+
+    public function getOptions($annee){
+        return $this->repository->getOptionsFromAnnee($annee);
     }
 }
