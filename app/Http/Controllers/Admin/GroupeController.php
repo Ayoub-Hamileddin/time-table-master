@@ -3,11 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Groupe\GroupeStoreRequest;
+use App\Models\Filiere;
 use App\Models\Groupe;
+use App\Services\GroupeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\VarDumper\Caster\RedisCaster;
 
 class GroupeController extends Controller
 {
+
+    public function __construct(
+        private GroupeService $service
+    ){
+
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -28,17 +40,27 @@ class GroupeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(GroupeStoreRequest $request)
     {
-        //
+         $data = $request->validated();
+         $newGroupe = $this->service->createGroupe($data);
+         if (!$newGroupe) {
+             return redirect()->back()->with("message","something went wrong");
+         }
+         return Redirect()->route("groupes.index")  
+                 ->with("message","groupe created successfuly");
+
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
-        //
+        $this->authorize("view",Groupe::class);
+        $groupe = $this->service->getGroupeById($id);
+        return view("admin.groupe.show",compact("groupe"));
     }
 
     /**
@@ -46,22 +68,33 @@ class GroupeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $this->authorize("update",Groupe::class);
+        $groupe = $this->service->getGroupeById($id);
+        return view("admin.groupe.edit",compact("groupe"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(GroupeStoreRequest $request, int $id)
     {
-        //
+        $data = $request->validated();
+        $updatedGroupe=$this->service->updateGroupe( $id,$data );
+       if (!$updatedGroupe) {
+             return redirect()->back()->with("message","something went wrong");
+         }
+        return Redirect()->route("groupes.index")  
+                 ->with("message","groupe updated successfuly");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Filiere $filiere)
     {
-        //
+        $this->authorize("delete",Groupe::class);
+        Filiere::delete();
+        return Redirect()->route("groupes.index")  
+                 ->with("message","groupe deleted successfuly");
     }
 }
