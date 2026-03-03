@@ -1,9 +1,7 @@
+@vite( ['resources/js/groupes/create.js'])
 <x-app-layout>
-     @vite( ['resources/js/groupes/create.js'])
-    <form method="post" action="{{ route('groupes.store') }}" class="mt-6 space-y-6 w-[1120px] mx-auto ">
+    <form method="POST" action="{{ route("groupes.store") }}" class="mt-6 space-y-6 w-[1120px] mx-auto ">
         @csrf
-        @method('post')
-
         <div>
             <x-input-label for="code" :value="__('Code')" />
             <x-text-input id="code" name="code" type="text" class="mt-1 block w-full" :value="old('code')" required autofocus autocomplete="name" />
@@ -33,8 +31,8 @@
              </label>     
             <div class="relative">
                 <select
-                    id="filiers"
-                    name="filiers"
+                    id="filiere_id"
+                    name="filiere_id"
                     class="w-full  bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none bg-none cursor-pointer">
                     <option disabled value="" selected>choisir une filiers</option>
                 </select>
@@ -44,6 +42,6 @@
             </div>
         </div>
 
-    
+         <x-primary-button>{{ __('Submit') }}</x-primary-button>
     </form>
 </x-app-layout>
