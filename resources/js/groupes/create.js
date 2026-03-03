@@ -1,9 +1,10 @@
 import $ from "jquery";
 window.$ = window.jQuery = $;
 
-$("#annee").on("change", function () {
+$("#annee").on("change", function (e) {
+    e.preventDefault();
     const annee = Number($("#annee").val());
-    let optionFiliers = $("#filiers");
+    let optionFiliers = $("#filiere_id");
     optionFiliers.empty();
     optionFiliers.append(
         '<option disabled value="" selected>choisir une filiers</option>',
