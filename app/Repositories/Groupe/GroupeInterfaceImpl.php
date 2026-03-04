@@ -8,7 +8,10 @@ use App\Repositories\Groupe\GroupeInterface;
 class GroupeInterfaceImpl implements GroupeInterface {
 
 
-
+    public function getAll(){
+        return Groupe::with("filiere")
+            ->paginate(5);
+    }
     public function create($data)
     {
         return Groupe::create($data);
@@ -24,9 +27,14 @@ class GroupeInterfaceImpl implements GroupeInterface {
         $groupe->update([
             "code" => $data["code"],
             "annee" => $data["annee"],
-            "filiere_id " => $data["filiere_id "],
+            "filiere_id " => $data["filiere_id"],
         ]);
         return $groupe ;
+    }
+
+    public function delete($filiere)
+    {
+        return $filiere->delete();
     }
 
 }
