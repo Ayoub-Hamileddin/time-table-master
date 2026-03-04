@@ -16,16 +16,16 @@ class GroupeController extends Controller
 
     public function __construct(
         private GroupeService $service
-    ){
-
-    }
+    ){}
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
+        $this->authorize("view",Groupe::class);
+        $groupes = $this->service->getAllGroupes();
+        return view("admin.groupe.index",compact("groupes"));
     }
 
     /**
@@ -90,11 +90,11 @@ class GroupeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Filiere $filiere)
+    public function destroy(Groupe $groupe)
     {
         $this->authorize("delete",Groupe::class);
-        Filiere::delete();
-        return Redirect()->route("groupes.index")  
+        $this->service->deleteGroupe($groupe); 
+        return redirect()->route("groupes.index")  
                  ->with("message","groupe deleted successfuly");
     }
 }
