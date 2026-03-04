@@ -26,5 +26,12 @@ class GroupeService
         return $this->repository->update($id,$data);
     }
 
+    public function deleteGroupe($filiere){
+        return $this->repository->delete($filiere);
+    }
+
+    public function getAllGroupes(){
+        return $this->repository->getAll();
+    }
 
 }
