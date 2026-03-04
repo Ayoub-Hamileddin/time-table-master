@@ -26,7 +26,11 @@
                     </div>
                 </header>
             @endisset
-
+            @if($message = session()->has("message"))
+                <div class='font-medium text-sm text-green-600'>
+                      {{ $message }}
+                </div>
+            @endif
             <!-- Page Content -->
             <main>
                 {{ $slot }}
