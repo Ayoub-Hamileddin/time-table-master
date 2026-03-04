@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\FiliereController;
+use App\Http\Controllers\Admin\FormateurController;
 use App\Http\Controllers\Admin\GroupeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,7 @@ Route::middleware(["auth","admin"])->group(function(){
     Route::resource("filieres",FiliereController::class);
     Route::get("/filieres/option/{annee}",[FiliereController::class,"getOptionAnnee"]);
     Route::resource("groupes",GroupeController::class);
+    Route::resource("formateurs",FormateurController::class);
 });
 
 
