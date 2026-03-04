@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Filiere;
+use App\Models\Formateur;
 use App\Models\Groupe;
 use App\Policies\FilierePolicy;
+use App\Policies\FormateurPolicy;
 use App\Policies\GroupePolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -24,7 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::policy(Filiere::class,FilierePolicy::class );
+        Gate::policy( Filiere::class,FilierePolicy::class );
         Gate::policy(Groupe::class,GroupePolicy::class );
+        Gate::policy(Formateur::class,policy: FormateurPolicy::class );
     }
 }
