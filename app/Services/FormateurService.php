@@ -23,4 +23,7 @@ class FormateurService {
     public function updateFormateur($data,$formateur){
         return $this->repository->update($data,$formateur);
     }
+    public function getAllWithoutPagination(){
+        return $this->repository->getAllWithoutPagination();
+    }
 }

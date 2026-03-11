@@ -14,6 +14,7 @@ class SalleService{
     public function getAllSalles(){
         return $this->repository->findAll();
     }
+
     public function createSalle($data){
         return $this->repository->create($data);
     }
@@ -21,8 +22,12 @@ class SalleService{
     public function updateSalle($data,$salle){
         return $this->repository->update($data,$salle);
     }
+
     public function deleteSalle($salle){
         return $this->repository->delete($salle);
     }
 
+    public function getAllWithoutPagination(){
+        return $this->repository->getAllWithoutPagination();
+    }
 }
