@@ -13,6 +13,14 @@ $("#seance_groupe").on("change", function () {
     window.location = `/seances?groupeId=${id}`;
 });
 
+const params = new URLSearchParams(window.location.search);
+const groupeId = params.get("groupeId");
+if (groupeId) {
+    $("#groupe_id").val(groupeId);
+    $("#seance_groupe").val(groupeId);
+}
+console.log($("#groupeId").val());
+
 $("#exportPdf").click(function () {
     const element = document.getElementById("planning");
     html2pdf()
