@@ -56,7 +56,7 @@ class SeanceController extends Controller
     public function store(StoreSeanceRequest $request)
     {
         $data = $request->validated();
-        // dd($data);
+
         $message = $this->seanceService->createOrUpdateSeance($data);
         return redirect()->back()
                 ->with("message",$message);
