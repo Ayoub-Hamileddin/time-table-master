@@ -21,4 +21,9 @@ class SalleInterfaceImpl implements SalleInterface{
     {
         return $salle->delete();
     }
+    
+    public function getAllWithoutPagination()
+    {
+        return Salle::all();
+    }
 }

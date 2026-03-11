@@ -33,5 +33,8 @@ class GroupeService
     public function getAllGroupes(){
         return $this->repository->getAll();
     }
-
+    public function getAllWithoutPagination()
+    {
+        return $this->repository->getAllWithoutPagination();
+    }
 }
