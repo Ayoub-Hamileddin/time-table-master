@@ -36,5 +36,9 @@ class GroupeInterfaceImpl implements GroupeInterface {
     {
         return $filiere->delete();
     }
+    public function getAllWithoutPagination()
+    {
+        return Groupe::all();
+    }
 
 }

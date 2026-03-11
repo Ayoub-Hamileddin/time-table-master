@@ -16,4 +16,9 @@ class FormateurInterfaceImpl implements FormateurInterface {
     {
         return $formateur->update($data);
     }
+
+    public function getAllWithoutPagination()
+    {
+        return Formateur::all();
+    }
 }

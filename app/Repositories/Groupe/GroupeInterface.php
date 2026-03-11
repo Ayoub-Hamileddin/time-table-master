@@ -8,4 +8,5 @@ interface GroupeInterface{
     public function getGroupeById(int $id);
     public function update(int $id,$data );
     public function delete($filiere);
+    public function getAllWithoutPagination();
 }
